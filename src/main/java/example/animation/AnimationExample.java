@@ -10,14 +10,13 @@ public class AnimationExample extends JFrame {
         setSize(800, 600);
         setLocationRelativeTo(null);
 
-
-        SingleTimer singleTimer = new SingleTimer();
-
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         JScrollPane scrollPane = new JScrollPane(panel);
-
         JButton button1 = new JButton("Start");
+
+
+        SingleTimer singleTimer = new SingleTimer();
         button1.addActionListener(e -> {
             JLabel label = new JLabel(" ");
             TimerParams params = TimerParams.of(20, 1000, (f, t) -> {
@@ -25,8 +24,6 @@ public class AnimationExample extends JFrame {
             });
             singleTimer.start(params);
             panel.add(label, 0);
-
-
         });
 
 
