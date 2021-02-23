@@ -11,30 +11,32 @@ public class AnimationExample extends JFrame {
         setLocationRelativeTo(null);
 
 
-
-        AnimationTimer animationTimer = new AnimationTimer(50, 1000);
+        SingleTimer singleTimer = new SingleTimer();
 
         JPanel panel = new JPanel();
-
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        JScrollPane scrollPane = new JScrollPane(panel);
 
         JButton button1 = new JButton("Start");
-        button1.addActionListener(e->{
-            JLabel label = new JLabel();
-            animationTimer.start((f, t) -> {
+        button1.addActionListener(e -> {
+            JLabel label = new JLabel(" ");
+            TimerParams params = TimerParams.of(20, 1000, (f, t) -> {
                 label.setText(f + "/" + t);
             });
-            panel.add(label);
+            singleTimer.start(params);
+            panel.add(label, 0);
+
+
         });
 
-        panel.add(button1);
 
-
-        setContentPane(panel);
+        getContentPane().add(button1, BorderLayout.NORTH);
+        getContentPane().add(scrollPane, BorderLayout.CENTER);
 
     }
 
     public static void main(String[] args) {
-        EventQueue.invokeLater(()->{
+        EventQueue.invokeLater(() -> {
             AnimationExample example = new AnimationExample();
             example.setVisible(true);
         });
